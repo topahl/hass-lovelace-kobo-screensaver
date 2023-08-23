@@ -33,6 +33,28 @@ jobs:
           tags: |
             ghcr.io/topahl/hass-lovelace-kobo-screensaver:${{ env.PACKAGE_VERSION }},
             ghcr.io/topahl/hass-lovelace-kobo-screensaver:latest
+      - name: Build and push HA_Addon AMD64 to Docker
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile.HA_ADDON
+          build-args: BUILD_FROM=homeassistant/amd64-base:latest
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/topahl/hass-lovelace-kobo-screensaver-ha-addon-amd64:${{ env.PACKAGE_VERSION }},
+            ghcr.io/topahl/hass-lovelace-kobo-screensaver-ha-addon-amd64:latest
+      - name: Build and push HA_Addon aarch64 to Docker
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile.HA_ADDON
+          build-args: BUILD_FROM=homeassistant/aarch64-base:latest
+          platforms: linux/arm64
+          push: true
+          tags: |
+            ghcr.io/topahl/hass-lovelace-kobo-screensaver-ha-addon-aarch64:${{ env.PACKAGE_VERSION }},
+            ghcr.io/topahl/hass-lovelace-kobo-screensaver-ha-addon-aarch64:latest
       - name: Tag git commit
         uses: pkgdeps/git-tag-action@v2
         with:
@@ -41,3 +63,4 @@ jobs:
           version: ${{ env.PACKAGE_VERSION }}
           git_commit_sha: ${{ github.sha }}
           git_tag_prefix: "v"
+          
