@@ -6,7 +6,8 @@ const { promises: fs } = require("fs");
 const fsExtra = require("fs-extra");
 const puppeteer = require("puppeteer");
 const { CronJob } = require("cron");
-const gm = require("gm");
+const gm = require('gm').subClass({ imageMagick: '7+' });
+const { exec } = require('node:child_process');
 
 // keep state of current battery level and whether the device is charging
 const batteryStore = {};
@@ -305,9 +306,6 @@ function convertImageToKindleCompatiblePngAsync(
 ) {
   return new Promise((resolve, reject) => {
     gm(inputPath)
-      .options({
-        imageMagick: config.useImageMagick === true
-      })
       .dither(pageConfig.dither)
       .rotate("white", pageConfig.rotation)
       .type(pageConfig.colorMode)
