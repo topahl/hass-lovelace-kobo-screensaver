@@ -325,7 +325,7 @@ function convertImageToKindleCompatiblePngAsync(
 function convertPngToKindleRawAsync(
   inputPath,
   outputPath){
-    const command = `ffmpeg -v quiet -vcodec png -i ${inputPath} -vcodec rawvideo -f rawvideo -pix_fmt rgb565 ${outputPath}`;
+    const command = `ffmpeg -v quiet -vcodec png -i ${inputPath} -vcodec rawvideo -y -f rawvideo -pix_fmt rgb565 ${outputPath}`;
     exec(command, (error, stdout, stderr) => {
       if (error) {
           console.log(`error: ${error.message}`);
