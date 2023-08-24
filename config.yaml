@@ -1,5 +1,5 @@
 name: Lovelace Kobo Screensaver
-version: 1.0.5
+version: 1.5.1
 slug: kobo-screensaver
 description: This tool can be used to display a Lovelace view of your Home Assistant instance on a Kobo device. It regularly takes a screenshot which can be polled and used as a screensaver image of the online screensaver plugin.
 startup: application
